@@ -1,93 +1,310 @@
 import { Card, CardContent } from './card';
-import { Bell, CheckCircle, ShoppingCart, Star, Users, Gift, X } from 'lucide-react';
+import { 
+  Bell, 
+  CheckCircle, 
+  ShoppingCart, 
+  Star, 
+  Users, 
+  Gift, 
+  X, 
+  UserPlus,
+  User,
+  CreditCard,
+  Package,
+  Truck,
+  Clock,
+  AlertCircle
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
+import api from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const NotificationsPage = ({ setHasUnreadNotifications }) => {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      type: 'order',
-      title: 'Order Confirmed',
-      message: 'Your order #ORD-12345 has been confirmed and is being processed.',
-      time: '2 minutes ago',
-      read: false,
-      icon: ShoppingCart,
-      color: 'text-green-500'
-    },
-    {
-      id: 2,
-      type: 'review',
-      title: 'Product Review Request',
-      message: 'How was your experience with the Wireless Headphones? Share your review!',
-      time: '1 hour ago',
-      read: false,
-      icon: Star,
-      color: 'text-yellow-500'
-    },
-    {
-      id: 3,
-      type: 'community',
-      title: 'New Follower',
-      message: 'Sarah Johnson started following you. Check out their profile!',
-      time: '3 hours ago',
-      read: false,
-      icon: Users,
-      color: 'text-blue-500'
-    },
-    {
-      id: 4,
-      type: 'promotion',
-      title: 'Special Offer',
-      message: 'Get 20% off on all electronics this weekend! Use code: WEEKEND20',
-      time: '5 hours ago',
-      read: false,
-      icon: Gift,
-      color: 'text-purple-500'
-    },
-    {
-      id: 5,
-      type: 'system',
-      title: 'Account Security',
-      message: 'Your account security has been updated successfully.',
-      time: '1 day ago',
-      read: false,
-      icon: CheckCircle,
-      color: 'text-gray-500'
-    }
-  ]);
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showDummy, setShowDummy] = useState(true); // Toggle for dummy notifications
+  const navigate = useNavigate();
 
+  // Dummy static notifications for buyer
+  const dummyNotifications = [
+    {
+      id: 'dummy-1',
+      type: 'order_confirmed',
+      title: 'Order Confirmed',
+      message: 'Your order #ORD-2024-001 has been confirmed and is being processed.',
+      time: '2 hours ago',
+      read: false,
+      data: { order_id: 1001 }
+    },
+    {
+      id: 'dummy-2',
+      type: 'payment_successful',
+      title: 'Payment Successful',
+      message: 'Payment of UGX 45,000 for order #ORD-2024-001 was successful.',
+      time: '2 hours ago',
+      read: false,
+      data: { order_id: 1001, amount: 45000 }
+    },
+
+    {
+      id: 'dummy-4',
+      type: 'order_delivered',
+      title: 'Order Delivered',
+      message: 'Your order #ORD-2024-003 has been delivered. Please rate your purchase.',
+      time: '1 day ago',
+      read: true,
+      data: { order_id: 1003 }
+    },
+
+
+  ];
+
+  // Icon mapping based on notification type
+  const getIconForType = (type) => {
+    switch(type) {
+      case 'follow':
+        return { icon: Users, color: 'text-blue-500' };
+      case 'follow_confirmation':
+        return { icon: CheckCircle, color: 'text-green-500' }; 
+      case 'order':
+        return { icon: ShoppingCart, color: 'text-green-500' };
+      case 'order_confirmed':
+        return { icon: CheckCircle, color: 'text-green-600' };
+      case 'payment_successful':
+        return { icon: CreditCard, color: 'text-emerald-500' };
+      case 'order_shipped':
+        return { icon: Truck, color: 'text-purple-500' };
+      case 'order_delivered':
+        return { icon: Package, color: 'text-blue-600' };
+      case 'deal_alert':
+        return { icon: Gift, color: 'text-orange-500' };
+      case 'price_drop':
+        return { icon: Star, color: 'text-yellow-500' };
+      case 'review':
+        return { icon: Star, color: 'text-yellow-500' };
+      case 'promotion':
+        return { icon: Gift, color: 'text-purple-500' };
+      case 'profile_update':
+        return { icon: User, color: 'text-indigo-500' };
+      case 'system':
+        return { icon: CheckCircle, color: 'text-gray-500' };
+      default:
+        return { icon: Bell, color: 'text-gray-500' };
+    }
+  };
+
+  // Format time
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+    return date.toLocaleDateString();
+  };
+
+  const fetchNotifications = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('accessToken');
+      console.log('1. Token present:', !!token);
+      
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+
+      console.log('2. Calling api.getSimpleNotifications()');
+      const result = await api.getSimpleNotifications();
+      console.log('3. Raw API response:', result);
+      
+      if (result.data && result.data.status === 'success') {
+        console.log('4. Notifications data array:', result.data.data);
+        console.log('5. Unread count:', result.data.unread_count);
+        
+        // Format real notifications from backend
+        const realNotifications = result.data.data.map(notif => {
+          console.log('6. Processing notification:', notif);
+          
+          // Set appropriate title based on type
+          let title = notif.title;
+          if (!title) {
+            if (notif.notification_type === 'profile_update') {
+              title = 'Profile Update';
+            } else if (notif.notification_type === 'follow') {
+              title = 'New Follower';
+            } else if (notif.notification_type === 'follow_confirmation') {
+              title = 'Follow Confirmation';
+            } else {
+              title = 'Notification';
+            }
+          }
+          
+          return {
+            id: notif.id,
+            type: notif.notification_type,
+            title: title,
+            message: notif.message,
+            time: formatTime(notif.created_at),
+            read: notif.read,
+            data: notif.data
+          };
+        });
+        
+        console.log('7. Real notifications:', realNotifications);
+        
+        // Combine real notifications with dummy notifications
+        // Only show dummy notifications that haven't been marked as read
+        const unreadDummy = dummyNotifications.filter(d => !d.read);
+        const readDummy = dummyNotifications.filter(d => d.read);
+        
+        // Combine all notifications - real ones first, then unread dummies, then read dummies
+        const allNotifications = [
+          ...realNotifications,
+          ...unreadDummy,
+          ...readDummy
+        ];
+        
+        setNotifications(allNotifications);
+      }
+    } catch (error) {
+      console.error('9. Error fetching notifications:', error);
+      // If error, still show dummy notifications
+      setNotifications(dummyNotifications);
+    } finally {
+      setLoading(false);
+      console.log('10. Loading set to false');
+    }
+  };
+
+  // Effect for fetching notifications on mount and polling
+  useEffect(() => {
+    fetchNotifications();
+    
+    // Set up polling for new notifications every 30 seconds
+    const interval = setInterval(fetchNotifications, 30000);
+    return () => clearInterval(interval);
+  }, []); 
+
+  // Separate effect for updating parent about unread count
   useEffect(() => {
     if (typeof setHasUnreadNotifications === 'function') {
-      setHasUnreadNotifications(false);
-      setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
+      const unreadCount = notifications.filter(notif => !notif.read).length;
+      setHasUnreadNotifications(unreadCount > 0);
     }
-  }, [setHasUnreadNotifications]);
+  }, [notifications, setHasUnreadNotifications]); 
 
-  const markAsRead = (id) => {
-    setNotifications(prev =>
-      prev.map(notif =>
-        notif.id === id ? { ...notif, read: true } : notif
-      )
-    );
+  const markAsRead = async (id) => {
+    try {
+      // Only try to mark real notifications as read in backend
+      if (!id.toString().startsWith('dummy-')) {
+        await api.markSimpleNotificationRead(id);
+      }
+      
+      setNotifications(prev =>
+        prev.map(notif =>
+          notif.id === id ? { ...notif, read: true } : notif
+        )
+      );
+      // Dispatch event to update bottom nav
+      window.dispatchEvent(new CustomEvent('notificationRead'));
+    } catch (error) {
+      console.error('Error marking notification as read:', error);
+    }
   };
 
-  const deleteNotification = (id, e) => {
+  const deleteNotification = async (id, e) => {
     e.stopPropagation();
-    setNotifications(prev => prev.filter(notif => notif.id !== id));
+    try {
+      // Only try to delete real notifications from backend
+      if (!id.toString().startsWith('dummy-')) {
+        await api.deleteSimpleNotification(id);
+      }
+      
+      setNotifications(prev => prev.filter(notif => notif.id !== id));
+      // Dispatch event to update bottom nav
+      window.dispatchEvent(new CustomEvent('notificationRead'));
+    } catch (error) {
+      console.error('Error deleting notification:', error);
+    }
   };
 
-  const clearAllNotifications = () => {
-    setNotifications([]);
+  const clearAllNotifications = async () => {
+    try {
+      // Clear real notifications from backend
+      await api.clearAllSimpleNotifications();
+      
+      // Clear dummy notifications as well
+      setNotifications([]);
+      // Dispatch event to update bottom nav
+      window.dispatchEvent(new CustomEvent('notificationsRead'));
+    } catch (error) {
+      console.error('Error clearing notifications:', error);
+    }
   };
 
-  const markAllRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
-    if (typeof setHasUnreadNotifications === 'function') {
-      setHasUnreadNotifications(false);
+  const markAllRead = async () => {
+    try {
+      // Mark all real notifications as read in backend
+      await api.markAllSimpleNotificationsRead();
+      
+      // Mark all notifications as read in state (including dummy)
+      setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
+      // Dispatch event to update bottom nav
+      window.dispatchEvent(new CustomEvent('notificationsRead'));
+    } catch (error) {
+      console.error('Error marking all as read:', error);
     }
   };
 
   const unreadCount = notifications.filter(notif => !notif.read).length;
+
+  // Handle notification click
+  const handleNotificationClick = (notification) => {
+    markAsRead(notification.id);
+    
+    // Navigate based on notification type
+    if (notification.type === 'follow' && notification.data?.seller_id) {
+      navigate(`/seller/${notification.data.seller_id}`);
+    } else if (notification.type === 'order' && notification.data?.order_id) {
+      navigate(`/orders/${notification.data.order_id}`);
+    } else if (notification.type === 'order_confirmed' && notification.data?.order_id) {
+      navigate(`/orders/${notification.data.order_id}`);
+    } else if (notification.type === 'payment_successful' && notification.data?.order_id) {
+      navigate(`/orders/${notification.data.order_id}`);
+    } else if (notification.type === 'order_shipped' && notification.data?.order_id) {
+      navigate(`/orders/${notification.data.order_id}`);
+    } else if (notification.type === 'order_delivered' && notification.data?.order_id) {
+      navigate(`/orders/${notification.data.order_id}`);
+    } else if (notification.type === 'review' && notification.data?.product_id) {
+      navigate(`/product/${notification.data.product_id}`);
+    } else if (notification.type === 'price_drop' && notification.data?.product_id) {
+      navigate(`/product/${notification.data.product_id}`);
+    } else if (notification.type === 'profile_update') {
+      navigate('/account');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="p-6 max-w-2xl mx-auto">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-48 mb-4"></div>
+          <div className="space-y-3">
+            {[1,2,3].map(i => (
+              <div key={i} className="h-24 bg-gray-200 rounded"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
@@ -124,18 +341,18 @@ const NotificationsPage = ({ setHasUnreadNotifications }) => {
       ) : (
         <div className="space-y-3">
           {notifications.map((notification) => {
-            const IconComponent = notification.icon;
+            const { icon: IconComponent, color } = getIconForType(notification.type);
             return (
               <Card
                 key={notification.id}
                 className={`hover:shadow-md transition-shadow cursor-pointer ${
                   !notification.read ? 'border-l-4 border-blue-500' : ''
                 }`}
-                onClick={() => markAsRead(notification.id)}
+                onClick={() => handleNotificationClick(notification)}
               >
                 <CardContent className="p-4">
                   <div className="flex items-start">
-                    <div className={`p-2 rounded-full ${notification.color} bg-opacity-20 mr-4`}>
+                    <div className={`p-2 rounded-full ${color} bg-opacity-20 mr-4`}>
                       <IconComponent className="w-5 h-5" />
                     </div>
                     
@@ -145,6 +362,19 @@ const NotificationsPage = ({ setHasUnreadNotifications }) => {
                           <h3 className="font-semibold text-black">{notification.title}</h3>
                           <p className="text-black mt-1">{notification.message}</p>
                           <p className="text-sm text-gray-500 mt-2">{notification.time}</p>
+                          
+                          {/* Show additional info for specific notification types */}
+                          {notification.type === 'order_confirmed' && notification.data?.order_id && (
+                            <span className="inline-block mt-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                              Order #{notification.data.order_id}
+                            </span>
+                          )}
+                          
+                          {notification.type === 'payment_successful' && notification.data?.amount && (
+                            <span className="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                              UGX {notification.data.amount.toLocaleString()}
+                            </span>
+                          )}
                         </div>
                         <button
                           onClick={(e) => deleteNotification(notification.id, e)}
@@ -172,7 +402,7 @@ const NotificationsPage = ({ setHasUnreadNotifications }) => {
       {notifications.length > 0 && (
         <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
           <h3 className="font-medium text-black mb-2">Quick Actions</h3>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <button
               onClick={markAllRead}
               className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition-colors"
@@ -180,7 +410,14 @@ const NotificationsPage = ({ setHasUnreadNotifications }) => {
               Mark All Read
             </button>
             <button
+              onClick={() => navigate('/orders')}
               className="px-3 py-1 border border-blue-600 text-blue-600 rounded-full text-sm hover:bg-blue-600 hover:text-white transition-colors"
+            >
+              View Orders
+            </button>
+            <button
+              onClick={() => navigate('/settings/notifications')}
+              className="px-3 py-1 border border-gray-600 text-gray-600 rounded-full text-sm hover:bg-gray-600 hover:text-white transition-colors"
             >
               Settings
             </button>
