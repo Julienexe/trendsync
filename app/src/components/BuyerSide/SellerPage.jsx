@@ -4,6 +4,7 @@ import { MapPin, Plus, Check, MessageCircle, MessageSquare, Heart, Star, Bookmar
 import { Card, CardContent } from './card';
 import api from '../../utils/api';
 import { useCart } from '../../utils/CartContext';
+import { useChat } from '../../utils/ChatContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
 import Loader from '../UISkeleton/Loader';
 
@@ -22,8 +23,9 @@ const SellerPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Cart context
+// Cart context
   const { cartItems, addToCart, removeFromCart } = useCart();
+  const { startChat } = useChat();
   const { isLiked, isBookmarked, toggleLike, toggleBookmark } = useLikeBookmark();
   
   const cartPosts = cartItems.reduce((acc, item) => {
@@ -206,7 +208,7 @@ const SellerPage = () => {
             <div className="flex w-full sm:w-64">
               <select
                 className="w-1/3 px-3 py-2 bg-gray-50 border-0 rounded-l-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                onChange={(e) => {}}
+                onChange={() => {}}
               >
                 <option value="all">All</option>
                 <option value="tech">Tech</option>
@@ -282,8 +284,20 @@ const SellerPage = () => {
                 <div className="text-center">
                   <span className="block font-semibold text-gray-900">{seller.trust || 0}%</span>
                   <span className="text-sm text-gray-500">trust</span>
-                </div>
+</div>
               </div>
+
+              <button
+                onClick={async () => {
+                  const productId = seller.products?.[0]?.id || 0;
+                  await startChat(sellerId, productId);
+                  navigate('/chat');
+                }}
+                className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Message Seller
+              </button>
             </div>
           </div>
 

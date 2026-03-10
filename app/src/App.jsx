@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AddProductProvider } from "./utils/AddProductContext";
+import { ChatProvider } from "./utils/ChatContext";
 import HomePage from "./components/BuyerSide/HomePage";
 import SellerHomePage from "./components/SellerSide/SellerHomePage";
 import LoginPage from "./components/BuyerSide/LoginPage";
@@ -28,6 +29,7 @@ import SellerNotifications from "./components/SellerSide/SellerNotfifcations";
 import SellerSettings from "./components/SellerSide/SellerSettings";
 import SellerTrendingPage from "./components/SellerSide/SellerTrendingPage";
 import { PageLoadingProvider } from "./utils/PageLoadingContext";
+import ChatPage from "./components/Chat/ChatPage";
 import { DarkModeProvider } from "./utils/DarkModeContext";
 import { LikeBookmarkProvider } from "./utils/LikeBookmarkContext";
 
@@ -263,7 +265,8 @@ const App = () => {
       <PageLoadingProvider>
         <DarkModeProvider>
           <LikeBookmarkProvider> 
-            <BrowserRouter>
+            <ChatProvider>
+          <BrowserRouter>
               <div className="flex min-h-screen bg-gray-100">
                 {isAuthenticated && userRole === 'buyer' && <SidebarNav onLogout={handleLogout} />}
                 
@@ -354,7 +357,8 @@ const App = () => {
                     <Route path="/search" element={<BuyerRoute><SearchBar /></BuyerRoute>} />
                     <Route path="/settings" element={<BuyerRoute><SettingsPage /></BuyerRoute>} />
                     <Route path="/notifications" element={<BuyerRoute><NotificationsPage /></BuyerRoute>} />
-                    <Route path="/account" element={<BuyerRoute><AccountPage /></BuyerRoute>} />
+                    <Route path="/chat" element={<BuyerRoute><ChatPage /></BuyerRoute>} />
+                <Route path="/account" element={<BuyerRoute><AccountPage /></BuyerRoute>} />
                     <Route path="/product/:productId" element={<BuyerRoute><Product /></BuyerRoute>} />
                     <Route path="/seller/:sellerId" element={<BuyerRoute><SellerPage /></BuyerRoute>} />
                     <Route path="/product/:productId/comments" element={<BuyerRoute><ProductCommentsPage /></BuyerRoute>} />
@@ -410,6 +414,7 @@ const App = () => {
             </BrowserRouter>
           </LikeBookmarkProvider>  
         </DarkModeProvider>
+        </ChatProvider>
       </PageLoadingProvider>
     </AddProductProvider>
   );

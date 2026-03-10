@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import api from '../../utils/api';
 import { useCart } from '../../utils/CartContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
+import { useChat } from '../../utils/ChatContext';
 import Loader from '../UISkeleton/Loader';
 import { usePageLoading } from '../../utils/PageLoadingContext';
 import Header from './Header';
@@ -159,6 +160,8 @@ const DescriptionTooltip = styled.div`
 `;
 
 const HomePage = () => {
+  const { addToCart } = useCart();
+  const { startChat } = useChat();
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState({});
   const { 
@@ -170,8 +173,6 @@ const HomePage = () => {
     initialFetchDone
   } = useLikeBookmark();
 
-  const [animatingLike, setAnimatingLike] = useState(null);
-  const [animatingFavorite, setAnimatingFavorite] = useState(null);
   const [currentVerticalIndex, setCurrentVerticalIndex] = useState(0);
   const [posts, setPosts] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
@@ -179,7 +180,7 @@ const HomePage = () => {
   const [quickDeals, setQuickDeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const { cartItems, addToCart, removeFromCart } = useCart();
+  const { cartItems, removeFromCart } = useCart();
   const { setIsPageLoading } = usePageLoading();
   const [categories, setCategories] = useState([]);
 
@@ -427,16 +428,28 @@ const HomePage = () => {
     );
   }
 
-  const dropdownItems = [
-    { label: 'Report', action: () => {} },
-    { label: 'Message Seller', action: () => {} },
-    { label: 'Go to Post', action: () => {} },
-    { label: 'Share to', action: () => {} },
-    { label: 'Copy Link', action: () => {} },
-    { label: 'Remove from Cart', action: () => {} },
-    { label: 'Unfollow', action: () => {} },
-    { label: 'Cancel', action: closeDropdown },
-  ];
+const dropdownItems = (postId) => {
+    const post = posts.find(p => p.id === postId);
+    return [
+      { label: 'Report', action: () => {} },
+      { 
+        label: 'Message Seller', 
+        action: async () => {
+          closeDropdown();
+          if (post?.sellerId) {
+            await startChat(post.sellerId, post.id);
+            navigate('/chat');
+          }
+        }
+      },
+      { label: 'Go to Post', action: () => { closeDropdown(); navigate(`/product/${postId}`); } },
+      { label: 'Share to', action: () => {} },
+      { label: 'Copy Link', action: () => {} },
+      { label: 'Remove from Cart', action: () => {} },
+      { label: 'Unfollow', action: () => {} },
+      { label: 'Cancel', action: closeDropdown },
+    ];
+  };
 
   return (
     <div className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto relative">
@@ -689,8 +702,8 @@ const HomePage = () => {
             <div className="p-4 border border-gray-200 text-center">
               <h3 className="font-semibold text-lg text-black">Post Options</h3>
             </div>
-            <div className="divide-y divide-gray-100">
-              {dropdownItems.map((item, index) => (
+<div className="divide-y divide-gray-100">
+              {dropdownItems(dropdownOpen).map((item, index) => (
                 <button
                   key={index}
                   onClick={item.action}

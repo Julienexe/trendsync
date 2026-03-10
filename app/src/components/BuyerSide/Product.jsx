@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Minus, Plus, Star, Settings, ChevronLeft, ChevronDown,
-  CheckCircle, User, Clock, Heart, Bookmark
+  CheckCircle, User, Clock, MessageSquare, Heart, Bookmark
 } from 'lucide-react';
+import { useCart } from '../../utils/CartContext';
+import { useChat } from '../../utils/ChatContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
 import { useCart } from '../../utils/CartContext';
 
@@ -30,8 +32,6 @@ const Product = () => {
   const { addToCart, cartItems } = useCart();
 
   const touchStartX = useRef(null);
-
-  const navigate = useNavigate();
 
   const formatCurrency = (amount) => {
     return `UGX ${Number(amount).toLocaleString('en-UG', {
@@ -538,7 +538,7 @@ const Product = () => {
         </span>
       </div>
 
-      <p className="mt-2">Stock: {product.stock_quantity}</p>
+<p className="mt-2">Stock: {product.stock_quantity}</p>
       <p>
         Min Order: {product.min_order} | Max Order: {product.max_order}
       </p>
