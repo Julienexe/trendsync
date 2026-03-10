@@ -20,6 +20,9 @@ const BottomNav = () => {
   const navItems = [
     { to: "/", icon: Home, label: "Home" },
     { to: "/trending", icon: TrendingUp, label: "Trending" },
+    { to: "/cart", icon: ShoppingCart, label: "Cart" },
+    { to: "/chat", icon: MessageSquare, label: "Chat" },
+    { to: "/notifications", icon: Bell, label: "Alerts" },
     { 
       to: "/cart", 
       icon: ShoppingCart, 

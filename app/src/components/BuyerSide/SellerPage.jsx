@@ -4,6 +4,7 @@ import { MapPin, Plus, Check, MessageCircle, MessageSquare, Heart, Star, Bookmar
 import { BuyerCard, BuyerCardContent } from './BuyerCard';
 import api from '../../utils/api';
 import { useCart } from '../../utils/CartContext';
+import { useChat } from '../../utils/ChatContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
 import Loader from '../UISkeleton/Loader';
 import { useDarkMode } from '../../utils/BuyerDarkModeContext';
@@ -27,8 +28,9 @@ const SellerPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Cart context
+// Cart context
   const { cartItems, addToCart, removeFromCart } = useCart();
+  const { startChat } = useChat();
   const { isLiked, isBookmarked, toggleLike, toggleBookmark } = useLikeBookmark();
   
   const cartPosts = cartItems.reduce((acc, item) => {
@@ -357,6 +359,18 @@ const SellerPage = () => {
                   }`}>trust</span>
                 </div>
               </div>
+
+              <button
+                onClick={async () => {
+                  const productId = seller.products?.[0]?.id || 0;
+                  await startChat(sellerId, productId);
+                  navigate('/chat');
+                }}
+                className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Message Seller
+              </button>
             </div>
           </div>
 
