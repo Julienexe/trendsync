@@ -11,7 +11,7 @@ class WebSocketService {
     this.shouldReconnect = true;
   }
 
-  connect() {
+  connect(role = 'buyer') {
     if (this.ws?.readyState === WebSocket.OPEN || this.isConnecting) {
       return Promise.resolve();
     }
@@ -21,7 +21,9 @@ class WebSocketService {
     return new Promise((resolve, reject) => {
       try {
         const token = localStorage.getItem('accessToken');
-        const wsUrl = token ? `${WS_URL}?token=${token}` : WS_URL;
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const userId = user.id;
+        const wsUrl = token ? `${WS_URL}?token=${token}&role=${role}&user_id=${userId}` : WS_URL;
         
         this.ws = new WebSocket(wsUrl);
 
@@ -71,17 +73,18 @@ class WebSocketService {
     }
   }
 
-  generateRoomId(buyerId, sellerId, productId) {
-    const ids = [buyerId, sellerId, productId].sort((a, b) => a - b);
-    return `chat_${ids[0]}_${ids[1]}_${ids[2]}`;
+  generateRoomId(buyerId, sellerId) {
+    const ids = [buyerId, sellerId].sort((a, b) => a - b);
+    return `chat_${ids[0]}_${ids[1]}`;
   }
 
-  joinRoom(roomId, userId) {
+  joinRoom(roomId, userId, role = 'buyer') {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({
         type: 'join_room',
         room_id: roomId,
         user_id: userId,
+        role: role,
       }));
     }
   }
@@ -95,13 +98,14 @@ class WebSocketService {
     }
   }
 
-  sendMessage(roomId, content, senderId) {
+  sendMessage(roomId, content, senderId, senderRole = 'buyer') {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({
         type: 'chat_message',
         room_id: roomId,
         content: content,
         sender_id: senderId,
+        sender_role: senderRole,
       }));
     }
   }

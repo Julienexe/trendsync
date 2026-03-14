@@ -27447,3 +27447,1099 @@ INFO 2026-03-08 01:36:05,524 log 14140 27836 "GET /api/wishlist/ HTTP/1.1" 200 2
 INFO 2026-03-08 01:36:05,544 log 14140 3264 "GET /api/products/ HTTP/1.1" 200 763
 INFO 2026-03-08 01:36:05,546 log 14140 27836 "GET /api/wishlist/ HTTP/1.1" 200 2
 INFO 2026-03-08 15:11:51,551 autoreload 11004 18036 Watching for file changes with StatReloader
+INFO 2026-03-11 00:55:46,774 cli 724901 140635412948800 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 00:55:46,775 server 724901 140635412948800 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-11 00:55:46,776 server 724901 140635412948800 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 00:55:46,778 server 724901 140635412948800 Listening on TCP address 0.0.0.0:8000
+ERROR 2026-03-11 01:03:22,498 log 724901 140635013117632 Internal Server Error: /api/register/seller/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: NOT NULL constraint failed: trendsync_seller.nin_number
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 24, in perform_create
+    serializer.save()
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/serializers.py", line 78, in create
+    Seller.objects.create(
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 669, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 874, in save
+    self.save_base(
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 966, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1220, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: NOT NULL constraint failed: trendsync_seller.nin_number
+ERROR 2026-03-11 01:05:00,375 log 724901 140635128194752 Internal Server Error: /api/register/seller/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: auth_user.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 24, in perform_create
+    serializer.save()
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/serializers.py", line 73, in create
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(**kwargs)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 874, in save
+    self.save_base(
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 966, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1220, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: auth_user.username
+WARNING 2026-03-11 01:06:14,172 log 724901 140635013117632 Unauthorized: /api/login/
+ERROR 2026-03-11 01:06:31,061 log 724901 140635128194752 Internal Server Error: /api/login/
+INFO 2026-03-11 01:06:49,368 server 724901 140635412948800 Killed 1 pending application instances
+INFO 2026-03-11 01:07:51,437 cli 731062 140017682618176 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:07:51,438 server 731062 140017682618176 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-11 01:07:51,438 server 731062 140017682618176 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:07:51,439 server 731062 140017682618176 Listening on TCP address 0.0.0.0:8000
+WARNING 2026-03-11 01:08:09,926 log 731062 140017359988416 Not Found: /static/admin/css/base.css
+WARNING 2026-03-11 01:08:09,928 log 731062 140016571373248 Not Found: /static/admin/css/dark_mode.css
+WARNING 2026-03-11 01:08:09,930 log 731062 140016604935872 Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2026-03-11 01:08:09,930 log 731062 140017359988416 Not Found: /static/admin/css/login.css
+WARNING 2026-03-11 01:08:09,935 log 731062 140016588154560 Not Found: /static/admin/js/theme.js
+WARNING 2026-03-11 01:08:09,941 log 731062 140016604935872 Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2026-03-11 01:08:10,045 log 731062 140016604935872 Not Found: /static/admin/css/login.css
+WARNING 2026-03-11 01:08:10,046 log 731062 140016571373248 Not Found: /static/admin/css/responsive.css
+WARNING 2026-03-11 01:08:10,049 log 731062 140017359988416 Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2026-03-11 01:08:10,129 log 731062 140016839808704 Not Found: /favicon.ico
+WARNING 2026-03-11 01:08:35,928 log 731062 140016588154560 Not Found: /static/admin/css/base.css
+WARNING 2026-03-11 01:08:35,944 log 731062 140016604935872 Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2026-03-11 01:08:35,947 log 731062 140016302937792 Not Found: /static/admin/js/theme.js
+WARNING 2026-03-11 01:08:35,949 log 731062 140016604935872 Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2026-03-11 01:08:35,958 log 731062 140016571373248 Not Found: /static/admin/css/dashboard.css
+WARNING 2026-03-11 01:08:35,964 log 731062 140017359988416 Not Found: /static/admin/css/dark_mode.css
+WARNING 2026-03-11 01:08:36,007 log 731062 140016604935872 Not Found: /static/admin/css/responsive.css
+WARNING 2026-03-11 01:08:36,038 log 731062 140016588154560 Not Found: /static/admin/js/nav_sidebar.js
+INFO 2026-03-11 01:08:51,098 server 731062 140017682618176 Killed 0 pending application instances
+INFO 2026-03-11 01:09:01,097 autoreload 731529 140525768611648 Watching for file changes with StatReloader
+INFO 2026-03-11 01:09:05,406 log 731529 140525475722944 "GET /admin/ HTTP/1.1" 200 14556
+INFO 2026-03-11 01:09:05,503 log 731529 140525457893056 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 3538
+INFO 2026-03-11 01:09:05,504 log 731529 140525290124992 "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2026-03-11 01:09:05,514 log 731529 140524954580672 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2026-03-11 01:09:05,516 log 731529 140525457893056 "GET /static/admin/css/responsive.css HTTP/1.1" 200 16273
+INFO 2026-03-11 01:09:05,518 log 731529 140525273343680 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2026-03-11 01:09:05,520 log 731529 140525256562368 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2026-03-11 01:09:05,522 log 731529 140525475722944 "GET /static/admin/css/base.css HTTP/1.1" 200 23100
+INFO 2026-03-11 01:09:05,577 log 731529 140525457893056 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 593
+INFO 2026-03-11 01:09:05,579 log 731529 140525256562368 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 978
+INFO 2026-03-11 01:09:10,473 log 731529 140525475722944 "GET /admin/auth/user/ HTTP/1.1" 200 25903
+INFO 2026-03-11 01:09:10,539 log 731529 140525457893056 "GET /static/admin/css/changelists.css HTTP/1.1" 200 7498
+INFO 2026-03-11 01:09:10,541 log 731529 140525290124992 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2026-03-11 01:09:10,548 log 731529 140525457893056 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2026-03-11 01:09:10,552 log 731529 140524954580672 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2026-03-11 01:09:10,559 log 731529 140525290124992 "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2026-03-11 01:09:10,559 log 731529 140525475722944 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2026-03-11 01:09:10,564 log 731529 140525256562368 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2026-03-11 01:09:10,565 log 731529 140524954580672 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2026-03-11 01:09:10,568 log 731529 140525256562368 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2026-03-11 01:09:10,570 log 731529 140525273343680 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2026-03-11 01:09:10,571 log 731529 140525475722944 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2026-03-11 01:09:10,614 log 731529 140525290124992 "GET /static/admin/img/search.svg HTTP/1.1" 200 607
+INFO 2026-03-11 01:09:10,615 log 731529 140525457893056 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 558
+INFO 2026-03-11 01:09:10,615 log 731529 140525273343680 "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 645
+INFO 2026-03-11 01:09:10,667 log 731529 140525457893056 "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 928
+INFO 2026-03-11 01:09:10,669 log 731529 140525273343680 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 593
+INFO 2026-03-11 01:09:10,669 log 731529 140525290124992 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1761
+ERROR 2026-03-11 01:09:30,202 log 731529 140525475722944 Internal Server Error: /admin/auth/user/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: trendsync_sellerfollow
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 710, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 247, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 2015, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1644, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/actions.py", line 40, in delete_selected
+    ) = modeladmin.get_deleted_objects(queryset, request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 2157, in get_deleted_objects
+    return get_deleted_objects(objs, request, self.admin_site)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 141, in get_deleted_objects
+    collector.collect(objs)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 208, in collect
+    return super().collect(objs, source_attr=source_attr, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 349, in collect
+    on_delete(self, field, sub_objs, self.using)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 23, in CASCADE
+    collector.collect(
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 208, in collect
+    return super().collect(objs, source_attr=source_attr, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 347, in collect
+    if getattr(on_delete, "lazy_sub_objs", False) or sub_objs:
+                                                     ^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 404, in __bool__
+    self._fetch_all()
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: trendsync_sellerfollow
+ERROR 2026-03-11 01:09:30,223 log 731529 140525475722944 "POST /admin/auth/user/ HTTP/1.1" 500 244879
+INFO 2026-03-11 01:10:03,709 autoreload 732221 140471542863680 Watching for file changes with StatReloader
+INFO 2026-03-11 01:10:05,182 log 732221 140471251760832 "GET /admin/auth/user/ HTTP/1.1" 200 25903
+INFO 2026-03-11 01:10:07,802 log 732221 140471251760832 "GET /admin/auth/user/ HTTP/1.1" 200 25903
+INFO 2026-03-11 01:10:07,873 log 732221 140471251760832 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ERROR 2026-03-11 01:10:18,166 log 732221 140471251760832 Internal Server Error: /admin/auth/user/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: trendsync_sellerfollow
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 710, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 247, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 2015, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1644, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/actions.py", line 40, in delete_selected
+    ) = modeladmin.get_deleted_objects(queryset, request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 2157, in get_deleted_objects
+    return get_deleted_objects(objs, request, self.admin_site)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 141, in get_deleted_objects
+    collector.collect(objs)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 208, in collect
+    return super().collect(objs, source_attr=source_attr, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 349, in collect
+    on_delete(self, field, sub_objs, self.using)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 23, in CASCADE
+    collector.collect(
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/contrib/admin/utils.py", line 208, in collect
+    return super().collect(objs, source_attr=source_attr, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/deletion.py", line 347, in collect
+    if getattr(on_delete, "lazy_sub_objs", False) or sub_objs:
+                                                     ^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 404, in __bool__
+    self._fetch_all()
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 359, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: trendsync_sellerfollow
+ERROR 2026-03-11 01:10:18,184 log 732221 140471251760832 "POST /admin/auth/user/ HTTP/1.1" 500 244879
+INFO 2026-03-11 01:12:29,530 cli 733842 140187619596096 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:12:29,530 server 733842 140187619596096 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-11 01:12:29,531 server 733842 140187619596096 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:12:29,531 server 733842 140187619596096 Listening on TCP address 0.0.0.0:8000
+WARNING 2026-03-11 01:15:48,785 log 733842 140187294553792 Unauthorized: /api/verify-token/
+WARNING 2026-03-11 01:15:48,786 log 733842 140187318081216 Unauthorized: /api/cart/items/
+WARNING 2026-03-11 01:15:48,820 log 733842 140187318081216 Unauthorized: /api/cart/items/
+WARNING 2026-03-11 01:15:48,824 log 733842 140187294553792 Unauthorized: /api/verify-token/
+WARNING 2026-03-11 01:15:48,861 log 733842 140187294553792 Not Found: /api/token/refresh/
+WARNING 2026-03-11 01:15:48,896 log 733842 140187318081216 Not Found: /api/token/refresh/
+WARNING 2026-03-11 01:15:48,896 log 733842 140187294553792 Not Found: /api/token/refresh/
+WARNING 2026-03-11 01:15:48,903 log 733842 140187318081216 Not Found: /api/token/refresh/
+ERROR 2026-03-11 01:47:31,907 log 733842 140187318081216 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:47:31,914 log 733842 140187294553792 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:48:17,914 log 733842 140187318081216 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:48:17,970 log 733842 140187294553792 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:48:32,350 log 733842 140186759452352 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:48:32,375 log 733842 140187294553792 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:49:29,713 log 733842 140187318081216 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:49:29,742 log 733842 140187294553792 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:49:49,352 log 733842 140187318081216 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:49:49,413 log 733842 140186759452352 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+INFO 2026-03-11 01:50:23,950 server 733842 140187619596096 Killed 2 pending application instances
+INFO 2026-03-11 01:52:21,650 cli 757267 140027962316608 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:52:21,651 server 757267 140027962316608 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-11 01:52:21,651 server 757267 140027962316608 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:52:21,652 server 757267 140027962316608 Listening on TCP address 0.0.0.0:8000
+ERROR 2026-03-11 01:52:26,080 log 757267 140027409462976 Internal Server Error: /api/liked-products/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 398, in get_queryset
+    buyer = self.request.user.buyer_profile
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+ERROR 2026-03-11 01:52:26,082 log 757267 140027375900352 Internal Server Error: /api/wishlist/
+Traceback (most recent call last):
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 254, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/trendsync/views.py", line 180, in get_queryset
+    wishlist, _ = Wishlist.objects.get_or_create(buyer=self.request.user.buyer_profile)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/JP/Desktop/dev/trendsync/.venv/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 520, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.buyer_profile.RelatedObjectDoesNotExist: User has no buyer_profile.. Did you mean: 'seller_profile'?
+INFO 2026-03-11 01:58:25,894 server 757267 140027962316608 Killed 1 pending application instances
+INFO 2026-03-11 01:58:28,439 cli 761349 140239690471232 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:58:28,440 server 761349 140239690471232 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-11 01:58:28,440 server 761349 140239690471232 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-11 01:58:28,441 server 761349 140239690471232 Listening on TCP address 0.0.0.0:8000
+INFO 2026-03-11 02:10:43,340 server 761349 140239690471232 Killed 3 pending application instances
+INFO 2026-03-14 19:43:50,097 cli 927128 139816089143104 Starting server at tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-14 19:43:50,098 server 927128 139816089143104 HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+INFO 2026-03-14 19:43:50,098 server 927128 139816089143104 Configuring endpoint tcp:port=8000:interface=0.0.0.0
+INFO 2026-03-14 19:43:50,099 server 927128 139816089143104 Listening on TCP address 0.0.0.0:8000
+WARNING 2026-03-14 19:44:04,023 log 927128 139815792924352 Not Found: /
+WARNING 2026-03-14 19:44:39,053 log 927128 139815792924352 Unauthorized: /api/verify-token/
+WARNING 2026-03-14 19:44:39,054 log 927128 139815775090368 Unauthorized: /api/cart/items/
+WARNING 2026-03-14 19:44:39,073 log 927128 139815792924352 Unauthorized: /api/cart/items/
+WARNING 2026-03-14 19:44:39,122 log 927128 139815792924352 Not Found: /api/token/refresh/
+WARNING 2026-03-14 19:44:39,170 log 927128 139815792924352 Unauthorized: /api/verify-token/
+WARNING 2026-03-14 19:44:39,175 log 927128 139815412561600 Not Found: /api/token/refresh/
+WARNING 2026-03-14 19:44:39,180 log 927128 139815792924352 Not Found: /api/token/refresh/
+WARNING 2026-03-14 19:45:06,920 log 927128 139815412561600 Not Found: /static/admin/css/dark_mode.css
+WARNING 2026-03-14 19:45:06,930 log 927128 139815385458368 Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2026-03-14 19:45:06,931 log 927128 139815792924352 Not Found: /static/admin/css/base.css
+WARNING 2026-03-14 19:45:06,935 log 927128 139815377065664 Not Found: /static/admin/js/theme.js
+WARNING 2026-03-14 19:45:06,936 log 927128 139815412561600 Not Found: /static/admin/css/login.css
+WARNING 2026-03-14 19:45:06,938 log 927128 139815368672960 Not Found: /static/admin/css/responsive.css
+WARNING 2026-03-14 19:45:07,037 log 927128 139815775090368 Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2026-03-14 19:45:07,062 log 927128 139815385458368 Not Found: /static/admin/css/responsive.css
+WARNING 2026-03-14 19:45:07,063 log 927128 139815385458368 Not Found: /static/admin/css/login.css
+WARNING 2026-03-14 19:45:07,064 log 927128 139815385458368 Not Found: /static/admin/css/nav_sidebar.css
+INFO 2026-03-14 19:45:34,905 server 927128 139816089143104 Killed 0 pending application instances

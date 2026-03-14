@@ -7,10 +7,10 @@ import {
 import { useCart } from '../../utils/CartContext';
 import { useChat } from '../../utils/ChatContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
-import { useCart } from '../../utils/CartContext';
 
 const Product = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
