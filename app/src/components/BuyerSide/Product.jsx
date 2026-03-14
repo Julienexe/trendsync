@@ -13,6 +13,7 @@ import { useDarkMode } from '../../utils/BuyerDarkModeContext';
 const Product = () => {
   const { isDarkMode } = useDarkMode();                   
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);

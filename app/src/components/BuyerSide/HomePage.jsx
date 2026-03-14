@@ -182,7 +182,10 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
   const { setIsPageLoading } = usePageLoading();
-  const [categories, setCategories] = useState([]);
+const [categories, setCategories] = useState([]);
+
+  const [animatingLike, setAnimatingLike] = useState(null);
+  const [animatingFavorite, setAnimatingFavorite] = useState(null);
 
   const cartPosts = cartItems.reduce((acc, item) => {
     if (item.product?.id) acc[item.product.id] = true;

@@ -9,6 +9,7 @@ const SellerBottomNav = () => {
     { to: "/seller/home", icon: Home, label: "Home" },
     { to: "/seller/trending2", icon: TrendingUp, label: "Trending" },
     { to: "/seller/add-product", icon: PlusCircle, label: "Add Product" },
+    { to: "/seller/chat", icon: MessageSquare, label: "Chat", showBadge: true, badgeCount: unreadCount },
     { to: "/seller/notifications", icon: Bell, label: "Notifications" },
     { to: "/seller/account", icon: User, label: "Account" },
   ];
@@ -39,9 +40,10 @@ const SellerBottomNav = () => {
                   }`}
                   strokeWidth={isActive ? 2.5 : 1.5}
                 />
-                {/* For the plus icon */}
-                {to === "/seller/add-product" && (
-                  <span className="absolute -top-1 -right-2 w-2 h-2 bg-green-500 rounded-full"></span>
+                {showBadge && badgeCount > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">
+                    {badgeCount > 99 ? '99+' : badgeCount}
+                  </span>
                 )}
               </div>
               <span

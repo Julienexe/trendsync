@@ -188,6 +188,28 @@ const App = () => {
     if (!isAuthenticated) return <Navigate to="/login" />;
     
     const storedUserStr = localStorage.getItem('user');
+    let isBuyerUser = true;
+    
+    if (storedUserStr) {
+      try {
+        const storedUser = JSON.parse(storedUserStr);
+        isBuyerUser = storedUser.is_seller !== true;
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+
+    if (!isBuyerUser) {
+      return <Navigate to="/seller/home" />;
+    }
+    
+    return children;
+  };
+
+  const SellerRoute = ({ children }) => {
+    if (!isAuthenticated) return <Navigate to="/seller/login" />;
+    
+    const storedUserStr = localStorage.getItem('user');
     let isSellerUser = false;
     
     if (storedUserStr) {
@@ -198,38 +220,10 @@ const App = () => {
         console.error('Error parsing user data:', error);
       }
     }
-
-    if (isSellerUser || userRole === 'seller') {
-      return <Navigate to="/seller/login" />;
-    }
-
-    if (userRole !== 'buyer') {
-      return <Navigate to="/login" />;
-    }
     
-    return children;
-  };
-
-  const SellerRoute = ({ children }) => {
-    if (!isAuthenticated) return <Navigate to="/seller/login" />;
-    
-    const storedUserStr = localStorage.getItem('user');
-    let isBuyerUser = false;
-    
-    if (storedUserStr) {
-      try {
-        const storedUser = JSON.parse(storedUserStr);
-        isBuyerUser = !storedUser.is_seller;
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-      }
-    }
-    
-    if (isBuyerUser || userRole === 'buyer') {
+    if (!isSellerUser) {
       return <Navigate to="/" />;
     }
-    
-    if (userRole !== 'seller') return <Navigate to="/seller/login" />;
     
     return children;
   };
