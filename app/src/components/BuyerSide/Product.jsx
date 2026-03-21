@@ -7,8 +7,6 @@ import {
 import { useCart } from '../../utils/CartContext';
 import { useChat } from '../../utils/ChatContext';
 import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
-import { useCart } from '../../utils/CartContext';
-import { useDarkMode } from '../../utils/BuyerDarkModeContext';   
 
 const Product = () => {
   const { isDarkMode } = useDarkMode();                   
@@ -35,9 +33,6 @@ const Product = () => {
   const { addToCart, cartItems } = useCart();
 
   const touchStartX = useRef(null);
-  const carouselRef = useRef(null); // Ref for the carousel container
-
-  const navigate = useNavigate();
 
   const formatCurrency = (amount) => {
     return `UGX ${Number(amount).toLocaleString('en-UG', {
@@ -511,8 +506,8 @@ const Product = () => {
         </span>
       </div>
 
-      <p className={`mt-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Stock: {product.stock_quantity}</p>
-      <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>
+<p className="mt-2">Stock: {product.stock_quantity}</p>
+      <p>
         Min Order: {product.min_order} | Max Order: {product.max_order}
       </p>
 

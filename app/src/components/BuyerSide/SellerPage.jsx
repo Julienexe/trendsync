@@ -236,12 +236,8 @@ const SellerPage = () => {
           <div className="flex justify-between items-center mb-4 sm:mb-6">
             <div className="flex w-full sm:w-64">
               <select
-                className={`w-1/3 px-3 py-2 border-0 rounded-l-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-gray-200' 
-                    : 'bg-gray-50 text-gray-900'
-                }`}
-                onChange={(e) => {}}
+                className="w-1/3 px-3 py-2 bg-gray-50 border-0 rounded-l-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                onChange={() => {}}
               >
                 <option value="all">All</option>
                 <option value="tech">Tech</option>
@@ -349,15 +345,9 @@ const SellerPage = () => {
                   }`}>sales</span>
                 </div>
                 <div className="text-center">
-                  <span className={`block font-semibold ${
-                    isDarkMode ? 'text-gray-100' : 'text-gray-900'
-                  }`}>
-                    {Math.round(seller.trust || 0)}%
-                  </span>
-                  <span className={`text-sm ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>trust</span>
-                </div>
+                  <span className="block font-semibold text-gray-900">{seller.trust || 0}%</span>
+                  <span className="text-sm text-gray-500">trust</span>
+</div>
               </div>
 
               <button

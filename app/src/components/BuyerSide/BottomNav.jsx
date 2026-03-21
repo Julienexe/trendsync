@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { Home, TrendingUp, ShoppingCart, Bell, User } from "lucide-react";
-import { useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Home, TrendingUp, ShoppingCart, Bell, User, MessageSquare } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../utils/CartContext";
 import { useNotifications } from "../../utils/NotificationContext";
 import { usePageLoading } from "../../utils/PageLoadingContext";

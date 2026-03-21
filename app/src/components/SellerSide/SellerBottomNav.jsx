@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { Home, TrendingUp, PlusCircle, Bell, User } from "lucide-react";
-import { useSellerDarkMode } from "../../utils/SellerDarkModeContext";
+import { Home, TrendingUp, PlusCircle, Bell, User, MessageSquare } from "lucide-react";
+import { useChat } from "../../utils/ChatContext";
 
 const SellerBottomNav = () => {
-  const { isDarkMode } = useSellerDarkMode();
-  
+  const { unreadNotifications } = useChat();
+  const unreadCount = unreadNotifications.length;
+
   const navItems = [
     { to: "/seller/home", icon: Home, label: "Home" },
     { to: "/seller/trending2", icon: TrendingUp, label: "Trending" },
@@ -15,12 +16,8 @@ const SellerBottomNav = () => {
   ];
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 border-t shadow-md flex justify-around py-2 z-50 md:hidden transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gray-800 border-gray-700' 
-        : 'bg-white border-gray-200'
-    }`}>
-      {navItems.map(({ to, icon: Icon, label }) => (
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-md flex justify-around py-2 z-50 md:hidden">
+      {navItems.map(({ to, icon: Icon, label, showBadge, badgeCount }) => (
         <NavLink 
           key={to} 
           to={to} 
