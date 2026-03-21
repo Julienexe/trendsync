@@ -29,7 +29,11 @@ const SellerBottomNav = () => {
               <div className="relative">
                 <Icon
                   className={`w-6 h-6 transition-all duration-300 ${
-                    isActive ? "text-green-500 scale-110" : "text-gray-500 scale-100"
+                    isActive 
+                      ? "text-green-500 scale-110" 
+                      : isDarkMode 
+                        ? "text-gray-400" 
+                        : "text-gray-500"
                   }`}
                   strokeWidth={isActive ? 2.5 : 1.5}
                 />
@@ -41,7 +45,11 @@ const SellerBottomNav = () => {
               </div>
               <span
                 className={`text-[10px] transition-colors duration-300 ${
-                  isActive ? "text-green-500 font-medium" : "text-gray-500"
+                  isActive 
+                    ? "text-green-500 font-medium" 
+                    : isDarkMode 
+                      ? "text-gray-400" 
+                      : "text-gray-500"
                 }`}
               >
                 {label}

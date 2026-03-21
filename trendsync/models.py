@@ -22,10 +22,8 @@ class Seller(models.Model):
     contact = models.CharField(max_length=100, blank=True)
     nin_number = models.CharField(max_length=50, blank=True)
     sales = models.PositiveIntegerField(default=0)
-    trust = models.DecimalField(
-        max_digits=5, 
-        decimal_places=2, 
-        default=0.00,
+    trust = models.PositiveIntegerField(
+        default=0,
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
     followers = models.PositiveIntegerField(default=0)
@@ -179,12 +177,12 @@ class Order(models.Model):
     tracking_number = models.CharField(max_length=100, blank=True, null=True)
     delivery_partner = models.CharField(max_length=100, blank=True, null=True)
     currency = models.CharField(max_length=3, default='UGX')   
-    pesapal_tracking_id = models.CharField(max_length=100, blank=True, null=True, help_text="Pesapal order tracking ID")
-
+    dusupay_internal_reference = models.CharField(max_length=100, blank=True, null=True)
+    dusupay_merchant_reference = models.CharField(max_length=100, blank=True, null=True)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT) 
     quantity = models.PositiveIntegerField()
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     subtotal = models.DecimalField(max_digits=12, decimal_places=2)
@@ -315,14 +313,6 @@ class ProductImage(models.Model):
         ordering = ['order']
 
 
-class PesapalConfig(models.Model):
-    ipn_id = models.CharField(max_length=100, blank=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "Pesapal Configuration"
-        verbose_name_plural = "Pesapal Configuration"
-
 
 class SellerFollow(models.Model):
     buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='following')
@@ -386,3 +376,12 @@ class SellerRating(models.Model):
     
     def __str__(self):
         return f"{self.buyer.name} rated {self.seller.name}: {self.rating}/5"
+    
+
+class DusuPayConfig(models.Model):
+    webhook_received_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "DusuPay Configuration"
+        verbose_name_plural = "DusuPay Configuration"
