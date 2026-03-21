@@ -10,13 +10,14 @@ import RegisterPage from "./components/BuyerSide/RegisterPage";
 import SellerRegisterPage from "./components/SellerSide/SellerRegisterPage"; 
 import TrendingPage from "./components/BuyerSide/TrendingPage";
 import SearchBar from "./components/BuyerSide/SearchBar";
-import SettingsPage from "./components/BuyerSide/SettingsPage";
+import SettingsPage from "./components/BuyerSide/BuyerSettingsPage";
 import AccountPage from "./components/BuyerSide/AccountPage";
 import NotificationsPage from "./components/BuyerSide/NotificationsPage";
 import Product from "./components/BuyerSide/Product";
 import CartPage from "./components/BuyerSide/CartPage";
 import SellerPage from "./components/BuyerSide/SellerPage";
 import BottomNav from "./components/BuyerSide/BottomNav";
+import { NotificationProvider } from "./utils/NotificationContext";
 import SellerBottomNav from "./components/SellerSide/SellerBottomNav";
 import SidebarNav from "./components/BuyerSide/SidebarNav";
 import ProductCommentsPage from "./components/BuyerSide/ProductCommentsPage";
@@ -38,12 +39,10 @@ const App = () => {
   const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Helper function to get token from any possible key
   const getToken = () => {
     return localStorage.getItem('accessToken') || localStorage.getItem('access');
   };
 
-  // Helper function to clear all auth data
   const clearAuthData = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('access');
@@ -86,7 +85,6 @@ const App = () => {
           const user = data.user || (storedUser ? JSON.parse(storedUser) : null);
 
           if (user) {
-            // Check for role mismatch
             if (user.is_seller && storedRole === 'buyer') {
               console.warn('User role mismatch. Logging out.');
               clearAuthData();
@@ -96,7 +94,6 @@ const App = () => {
               return;
             }
 
-            // Store user data if not already stored
             if (!storedUser) {
               localStorage.setItem('user', JSON.stringify(user));
             }
@@ -106,16 +103,13 @@ const App = () => {
             localStorage.setItem('userRole', role);
             setIsAuthenticated(true);
           } else {
-            // If no user data but token is valid, use stored role
             setIsAuthenticated(true);
             setUserRole(storedRole || 'buyer');
           }
         } else if (response.status === 401) {
-          // Token expired or invalid
           console.log('Token invalid, attempting refresh...');
           const refreshed = await refreshToken();
           if (refreshed) {
-            // Retry validation with new token
             validateToken();
             return;
           } else {
@@ -131,7 +125,6 @@ const App = () => {
         }
       } catch (error) {
         console.error('Token validation error:', error);
-        // Don't clear auth data on network errors - assume token might still be valid
         if (storedUser) {
           try {
             const user = JSON.parse(storedUser);
@@ -167,7 +160,6 @@ const App = () => {
 
         if (response.ok) {
           const data = await response.json();
-          // Store new access token in both possible locations
           localStorage.setItem('accessToken', data.access);
           localStorage.setItem('access', data.access);
           if (data.refresh) {
@@ -238,7 +230,6 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    // Clear all possible token keys
     localStorage.removeItem('accessToken');
     localStorage.removeItem('access');
     localStorage.removeItem('refreshToken');
@@ -246,7 +237,6 @@ const App = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('userRole');
     
-    // Dispatch events
     window.dispatchEvent(new Event('authStateChanged'));
     window.dispatchEvent(new Event('storage'));
     
@@ -254,9 +244,21 @@ const App = () => {
     setUserRole(null);
   };
 
-  return (
-    <AddProductProvider>
-      <PageLoadingProvider>
+  const AuthenticatedContent = () => {
+    if (!isAuthenticated) {
+      return (
+        <Routes>
+          <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />} />
+          <Route path="/register" element={<RegisterPage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />} />
+          <Route path="/seller/login" element={<SellerLoginPage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />} />
+          <Route path="/seller/register" element={<SellerRegisterPage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      );
+    }
+
+    if (userRole === 'buyer') {
+      return (
         <DarkModeProvider>
           <LikeBookmarkProvider> 
             <ChatProvider>

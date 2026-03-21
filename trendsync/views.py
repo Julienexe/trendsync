@@ -42,6 +42,10 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 import traceback
 from django.db.models import Avg
+import json
+import logging
+from .serializers import InitiatePaymentSerializer, DusuPayWebhookSerializer  
+logger = logging.getLogger('dusupay')
 from django.shortcuts import get_object_or_404
 from .permissions import IsSeller, IsBuyer, IsOwner
 from rest_framework import filters
@@ -62,6 +66,9 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Notification
 from .serializers import NotificationSerializer
 import logging
+from .dusupay_utils import DusuPayClient
+from .models import DusuPayConfig
+
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
@@ -1100,7 +1107,6 @@ def initiate_payment(request):
     logger.info(f"Payment initiation by user {request.user.id}")
     serializer = InitiatePaymentSerializer(data=request.data)
     if not serializer.is_valid():
-        logger.warning(f"Invalid initiate_payment data: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     order_id = serializer.validated_data["order_id"]
@@ -1409,14 +1415,17 @@ def order_status(request, order_id):
 
 @api_view(["GET"])
 @permission_classes([permissions.AllowAny])
-def pesapal_health(request):
+def dusupay_health(request):
+    """
+    Health check for DusuPay API
+    """
     try:
         pesapal_utils.get_access_token()
         return Response(
             {"status": "healthy", "message": "Pesapal API is reachable"}, status=200
         )
     except Exception as e:
-        logger.error(f"Pesapal health check failed: {str(e)}", exc_info=True)
+        logger.error(f"DusuPay health check failed: {str(e)}")
         return Response({"status": "unhealthy", "message": str(e)}, status=503)
 
 
@@ -1506,6 +1515,9 @@ def toggle_follow_seller(request, seller_id):
                 )
             except Buyer.DoesNotExist:
                 print("No buyer profile found in database for this user")
+                return Response({
+                    'error': 'Only buyers can follow sellers. No buyer profile found for this user.'
+                }, status=status.HTTP_403_FORBIDDEN)
             except Exception as e:
                 print(f"Error querying buyer: {e}")
 
@@ -1570,6 +1582,14 @@ def toggle_follow_seller(request, seller_id):
                 following = False
                 message = "Unfollowed seller"
                 print("Unfollowed")
+                
+                # Return response for unfollow
+                return Response({
+                    'success': True,
+                    'following': following,
+                    'followers_count': seller.followers,
+                    'message': message
+                }, status=status.HTTP_200_OK)
             else:
                 # Follow
                 SellerFollow.objects.create(buyer=buyer, seller=seller)
@@ -1593,7 +1613,7 @@ def toggle_follow_seller(request, seller_id):
 
                     # Notification for BUYER (confirmation)
                     SimpleNotification.objects.create(
-                        recipient=request.user,  # The buyer
+                        recipient=request.user,
                         sender_name=seller.name,
                         message=f"You are now following {seller.name}",
                         type="follow_confirmation",
@@ -2151,7 +2171,7 @@ def rate_seller(request):
         # Calculate average
         if ratings:
             avg_rating = sum(ratings) / len(ratings)
-            trust_percentage = round(avg_rating * 20, 2)  # Convert to percentage
+            trust_percentage = round(avg_rating * 20)
         else:
             trust_percentage = 0
 
