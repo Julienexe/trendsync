@@ -1,25 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { Home, TrendingUp, PlusCircle, Bell, User } from "lucide-react";
-import { useSellerDarkMode } from "../../utils/SellerDarkModeContext";
+import { Home, TrendingUp, PlusCircle, Bell, User, MessageSquare } from "lucide-react";
+import { useChat } from "../../utils/ChatContext";
 
 const SellerBottomNav = () => {
-  const { isDarkMode } = useSellerDarkMode();
-  
+  const { unreadNotifications } = useChat();
+  const unreadCount = unreadNotifications.length;
+
   const navItems = [
     { to: "/seller/home", icon: Home, label: "Home" },
     { to: "/seller/trending2", icon: TrendingUp, label: "Trending" },
     { to: "/seller/add-product", icon: PlusCircle, label: "Add Product" },
+    { to: "/seller/chat", icon: MessageSquare, label: "Chat", showBadge: true, badgeCount: unreadCount },
     { to: "/seller/notifications", icon: Bell, label: "Notifications" },
     { to: "/seller/account", icon: User, label: "Account" },
   ];
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 border-t shadow-md flex justify-around py-2 z-50 md:hidden transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gray-800 border-gray-700' 
-        : 'bg-white border-gray-200'
-    }`}>
-      {navItems.map(({ to, icon: Icon, label }) => (
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-md flex justify-around py-2 z-50 md:hidden">
+      {navItems.map(({ to, icon: Icon, label, showBadge, badgeCount }) => (
         <NavLink 
           key={to} 
           to={to} 
@@ -39,9 +37,10 @@ const SellerBottomNav = () => {
                   }`}
                   strokeWidth={isActive ? 2.5 : 1.5}
                 />
-                {/* For the plus icon */}
-                {to === "/seller/add-product" && (
-                  <span className="absolute -top-1 -right-2 w-2 h-2 bg-green-500 rounded-full"></span>
+                {showBadge && badgeCount > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">
+                    {badgeCount > 99 ? '99+' : badgeCount}
+                  </span>
                 )}
               </div>
               <span

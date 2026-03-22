@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { Home, TrendingUp, ShoppingCart, Bell, User } from "lucide-react";
-import { useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Home, TrendingUp, ShoppingCart, Bell, User, MessageSquare } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../utils/CartContext";
 import { useNotifications } from "../../utils/NotificationContext";
 import { usePageLoading } from "../../utils/PageLoadingContext";
@@ -17,9 +17,10 @@ const BottomNav = () => {
     return <BottomNavSkeleton />;
   }
 
-  const navItems = [
+const navItems = [
     { to: "/", icon: Home, label: "Home" },
     { to: "/trending", icon: TrendingUp, label: "Trending" },
+    { to: "/chat", icon: MessageSquare, label: "Chat" },
     { 
       to: "/cart", 
       icon: ShoppingCart, 
@@ -31,7 +32,7 @@ const BottomNav = () => {
     { 
       to: "/notifications", 
       icon: Bell, 
-      label: "Notifications", 
+      label: "Alerts", 
       showBadge: true, 
       count: unreadCount,
       badgeColor: "bg-red-500"

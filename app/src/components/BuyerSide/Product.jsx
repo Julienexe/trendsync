@@ -2,9 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Minus, Plus, Star, Settings, ChevronLeft, ChevronDown,
-  CheckCircle, User, Clock, Heart, Bookmark
+  CheckCircle, User, Clock, MessageSquare, Heart, Bookmark
 } from 'lucide-react';
-import { useLikeBookmark } from '../../utils/LikeBookmarkContext';
 import { useCart } from '../../utils/CartContext';
 import { useDarkMode } from '../../utils/BuyerDarkModeContext';
 import { getFullImageUrl, PLACEHOLDER_IMAGE } from '../../utils/imageUtils';
@@ -16,6 +15,7 @@ const Product = () => {
   console.log('Product images data:', product?.images);
   console.log('Product photo:', product?.product_photo);                 
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -521,8 +521,8 @@ const Product = () => {
         </span>
       </div>
 
-      <p className={`mt-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Stock: {product.stock_quantity}</p>
-      <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>
+<p className="mt-2">Stock: {product.stock_quantity}</p>
+      <p>
         Min Order: {product.min_order} | Max Order: {product.max_order}
       </p>
 
